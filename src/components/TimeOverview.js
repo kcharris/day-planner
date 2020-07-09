@@ -4,7 +4,8 @@ class TimeOverview extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: "",           
+            value: "",
+            endTime: "",           
             timeAvailable: null,
             timeUsed: 0,
             date: new Date(Date()),
@@ -23,14 +24,33 @@ class TimeOverview extends React.Component {
         //use current time to set value of time available
         event.preventDefault();
         this.setState({
+            endTime: this.state.value,
             timeAvailable: (() => {
                 let d = new Date()
-                d.setHours(Number(this.state.value.slice(0,2)) - d.getHours())
-                d.setMinutes(Number(this.state.value.slice(3,5))- d.getMinutes())
+                d.setHours(Number(this.state.endTime.slice(0,2)) - d.getHours())
+                d.setMinutes(Number(this.state.endTime.slice(3,5))- d.getMinutes())
                 return d
             })(),
         })
+    };
+    componentDidMount(){
+        setInterval(() => {
+            this.setState({
+                date: new Date()
+            });
+            if (this.state.timeAvailable != null){
+                this.setState({
+                    timeAvailable: (() => {
+                        let d = new Date()
+                        d.setHours(Number(this.state.endTime.slice(0,2)) - d.getHours())
+                        d.setMinutes(Number(this.state.endTime.slice(3,5))- d.getMinutes())
+                        return d
+                    })(),
+                });
+            }   
+        }, 1000);
     }
+
     render() {
         return (
             <ul>
@@ -47,7 +67,7 @@ class TimeOverview extends React.Component {
                     </form>
                 </li>
                 <li>
-                    Time Available: {this.state.timeAvailable == null ? "00:00" : this.state.timeAvailable.toTimeString().slice(0,5)}
+                    Time Available: {this.state.timeAvailable == null ? "00:00" : this.state.timeAvailable.toTimeString().slice(0,8)}
                 </li>
                 <li>
                     Time Used: {this.state.timeUsed}
