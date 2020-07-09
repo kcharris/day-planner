@@ -4,7 +4,7 @@ import TimeOverview from './components/TimeOverview'
 
 function App() {
   return (
-      <TimeOverview date = {new Date()} />
+      <TimeOverview />
       //<ItemList/>
   );
 }
