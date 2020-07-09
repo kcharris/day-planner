@@ -35,7 +35,7 @@ class TimeOverview extends React.Component {
         return (
             <ul>
                 <li>
-                    Current Time is {this.props.date.toTimeString().slice(0,5)}
+                    Current Time is {this.state.date.toTimeString().slice(0,5)}
                 </li>
                 <li>
                     <form onSubmit={this.handleSubmit}>
