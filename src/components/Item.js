@@ -4,9 +4,10 @@ class Item extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      name: "cat",
+      name: "",
       order: null,
-      time: 0,
+      hours: 0,
+      minutes: 0,
       description: "",
     }
     this.handleChange = this.handleChange.bind(this)
