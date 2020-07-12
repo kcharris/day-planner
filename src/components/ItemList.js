@@ -4,21 +4,26 @@ import Item from './Item'
 class ItemList extends React.Component{
   constructor(props){
     super(props)
-    setState = {
+    this.state = {
       listOfItems: [],
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
-  handleSubmit(){
+  handleClick(){
     this.setState({
-      listOfItems: listOfItems.concat([<Item/>])
+      listOfItems: this.state.listOfItems.concat(<Item/>)
     })
   }
   render(){
     return (
-      <form onSubmit={this.handleSubmit()}>
-        <input type="submit" value="Add Item"/>
-      </form>
+      <div>
+        <form>
+          <input type="button" value="Add Item" onClick={this.handleClick}/>
+        </form>
+        <ul>
+          {this.state.listOfItems}
+        </ul>
+      </div>
     )
   }
 }
