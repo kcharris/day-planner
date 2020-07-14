@@ -4,15 +4,15 @@ import Item from './Item'
 class ItemList extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
-      listOfItems: [],
-      keyTracker: 0, //value that incrememnts as items are added, not deleted
-    }
     this.handleClick = this.handleClick.bind(this)
+    this.handleItemChange = this.handleItemChange.bind(this)
+  }
+  handleItemChange(){ //add argument so data can be changed
+
   }
   handleClick(){
     this.setState({
-      listOfItems: this.state.listOfItems.concat(<Item key={keyTracker}/>),
+      listOfItems: this.state.listOfItems.concat(<Item onChange={() => this.handleItemChange()}/>),
       keyTracker: (this.state.keyTracker + 1)
     })
   }

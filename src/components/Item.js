@@ -3,13 +3,6 @@ import React from 'react'
 class Item extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      name: "",
-      order: null,
-      hours: 0,
-      minutes: 0,
-      description: "",
-    }
     this.handleChange = this.handleChange.bind(this)
   }
   handleChange(e){
