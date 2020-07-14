@@ -17,12 +17,22 @@ class App extends React.Component {
       key: 0,
       itemList: {},
     })
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleChange(e){
+    /* this needs to take a key to find the specific
+    ItemData instance within itemList, and then use the
+    name to access the target data to change...*/
+    this.setState({
+      [e.target.name]: e.target.value
+      }
+    )
   }
   render(){
     return (
       <div>
-        <TimeOverview />
-        <ItemList />
+        <TimeOverview itemList={itemList} key={key}/>
+        <ItemList itemList={itemList} key={key} onChange={this.handleChange}/>
       </div>
     );
   }

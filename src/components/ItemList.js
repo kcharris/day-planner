@@ -5,14 +5,10 @@ class ItemList extends React.Component{
   constructor(props){
     super(props)
     this.handleClick = this.handleClick.bind(this)
-    this.handleItemChange = this.handleItemChange.bind(this)
-  }
-  handleItemChange(){ //add argument so data can be changed
-
   }
   handleClick(){
     this.setState({
-      listOfItems: this.state.listOfItems.concat(<Item onChange={() => this.handleItemChange()}/>),
+      listOfItems: this.state.listOfItems.concat(<Item onChange={() => this.props.handleChange}/>),
       keyTracker: (this.state.keyTracker + 1)
     })
   }
