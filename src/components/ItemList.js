@@ -6,14 +6,12 @@ class ItemList extends React.Component{
     super(props)
     this.state = {
       listOfItems: [],
-      keyTracker: 0, //value that incrememnts as items are added, not deleted
     }
     this.handleClick = this.handleClick.bind(this)
   }
   handleClick(){
     this.setState({
-      listOfItems: this.state.listOfItems.concat(<Item key={keyTracker}/>),
-      keyTracker: (this.state.keyTracker + 1)
+      listOfItems: this.state.listOfItems.concat(<Item/>),
     })
   }
   render(){
