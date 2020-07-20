@@ -1,41 +1,31 @@
 import React from 'react';
 import TimeOverview from './components/TimeOverview'
 import ItemList from './components/ItemList'
+import Item from './components/Item'
+
 
 class App extends React.Component {
   constructor(props){
     super(props)
-    class ItemData {
-      name = ''
-      order = null
-      hours = 0
-      minutes = 0
-      description = ''
-      key = 0
+    this.state = {
+      listOfItems: [],
     }
-    this.setState({
-      key: 0,
-      itemList: {},
-    })
-    this.handleChange = this.handleChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
-  handleChange(e){
-    /* this needs to take a key to find the specific
-    ItemData instance within itemList, and then use the
-    name to access the target data to change...*/
+  handleClick(){
     this.setState({
-      [e.target.name]: e.target.value
-      }
-    )
+      listOfItems: this.state.listOfItems.concat(<Item/>),
+    })
   }
   render(){
     return (
-      <div>
-        <TimeOverview itemList={itemList} key={key}/>
-        <ItemList itemList={itemList} key={key} onChange={this.handleChange}/>
-      </div>
+    <div>
+      <TimeOverview />
+      <ItemList onClick={this.handleClick} listOfItems={this.state.listOfItems}/>
+    </div>
     );
   }
+  
 }
 
 export default App;
