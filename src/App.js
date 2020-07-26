@@ -21,7 +21,7 @@ class App extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
   handleClick(){
-    const data = (this.state.dataObj)
+    const data = Object.assign({}, this.state.dataObj)
     this.setState({
       listOfData: this.state.listOfData.concat(data),
       dataObj: (() => {
