@@ -29,14 +29,14 @@ class App extends React.Component {
         newObj.order += 1
         return newObj
       })(),
-      listOfItems: listOfData.map((x) => <Item data={x}/>),
+      listOfItems: this.state.listOfData.map((x) => <Item data={x}/>),
     })
   }
   render(){
     return (
     <div>
       <TimeOverview />
-      <ItemList onClick={this.handleClick} listOfItems={this.state.listOfItems} listOfData={listOfData}/>
+      <ItemList onClick={this.handleClick} listOfItems={this.state.listOfItems} listOfData={this.state.listOfData}/>
     </div>
     );
   }
