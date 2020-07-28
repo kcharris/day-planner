@@ -25,8 +25,26 @@ class App extends React.Component {
   handleChange(e) {
     this.setState({
       listOfData: this.state.listOfData.map((x) => {
+        const name = e.target.name
+        const value = e.target.value
         if (x.id == e.target.id){
-          x[e.target.name] = e.target.value
+          switch(e.target.name){
+            case 'name':
+              x[name] = value
+              break
+            case 'order':
+              x[name] = value
+              break
+            case 'hours':
+              x[name] = value
+              break
+            case 'minutes':
+              x[name] = value
+              break
+            case 'description':
+              x[name] = value
+          }
+          
         }
         return x
       }),
