@@ -1,14 +1,11 @@
 import React from 'react';
 import TimeOverview from './components/TimeOverview'
 import ItemList from './components/ItemList'
-import Item from './components/Item'
-
 
 class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      listOfItems: [],
       listOfData: [],
       dataObj: {
         name: '',
@@ -49,8 +46,7 @@ class App extends React.Component {
           
         }
         return x
-      }),
-      listOfItems: this.state.listOfData.map((x) => <Item data={x} onChange={this.handleChange}/>)
+      })
     })
   }
   handleClick(){
@@ -62,15 +58,14 @@ class App extends React.Component {
         newObj.order += 1
         newObj.id += 1
         return newObj
-      })(),
-      listOfItems: this.state.listOfData.map((x) => <Item data={x} onChange={this.handleChange}/>),
+      })()
     })
   }
   render(){
     return (
     <div>
       <TimeOverview />
-      <ItemList onClick={this.handleClick} listOfItems={this.state.listOfItems} listOfData={this.state.listOfData}/>
+      <ItemList onClick={this.handleClick} onChange={this.handleChange} listOfData={this.state.listOfData}/>
     </div>
     );
   }
