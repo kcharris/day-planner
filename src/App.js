@@ -43,6 +43,8 @@ class App extends React.Component {
               break
             case 'description':
               x[name] = value
+              break
+            default:
           }
           
         }
