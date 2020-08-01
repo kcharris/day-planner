@@ -27,7 +27,7 @@ class App extends React.Component {
       listOfData: this.state.listOfData.map((x) => {
         const name = e.target.name
         const value = e.target.value
-        if (x.id == e.target.id){
+        if (x.id === Number(e.target.id)){
           switch(e.target.name){
             case 'name':
               x[name] = value
