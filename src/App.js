@@ -42,12 +42,15 @@ class App extends React.Component {
               x[name] = value
               break
             case 'order':
-              x[name] = value
+              if (/^[1-9]?$|^[1-9][\d]$/.test(value))
+                x[name] = value
               break
             case 'hours':
-              x[name] = value
+              if (/^[\d]?$|^1[\d]$|^2[0-4]$/.test(value))
+                x[name] = value
               break
             case 'minutes':
+              if(/^[\d]$|^[1-5][\d]$/.test(value))
               x[name] = value
               break
             case 'description':
