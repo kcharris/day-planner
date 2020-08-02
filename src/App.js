@@ -27,6 +27,9 @@ class App extends React.Component {
         newList.sort(function(a,b){
           return Number(a.order) - Number(b.order)
         })
+        for(let i = 0; i < newList.length; i++){
+          newList[i].order = i +1
+        }
         return newList
       })()
     })
