@@ -8,6 +8,7 @@ class ItemList extends React.Component{
       <div>
         <form>
           <input type="button" value="Add Item" onClick={this.props.onClick}/>
+          <input type="button" value="Sort by order" onClick={this.props.sortList} />
         </form>
         <ul>
           {this.props.listOfData.map((x) => <Item data={x} onChange={this.props.onChange}/>)}

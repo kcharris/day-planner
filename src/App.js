@@ -18,6 +18,18 @@ class App extends React.Component {
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.sortList = this.sortList.bind(this)
+  }
+  sortList() {
+    this.setState({
+      listOfData: (() => {
+        let newList = new Array(...this.state.listOfData)
+        newList.sort(function(a,b){
+          return Number(a.order) - Number(b.order)
+        })
+        return newList
+      })()
+    })
   }
   handleChange(e) {
     this.setState({
@@ -65,7 +77,7 @@ class App extends React.Component {
     return (
     <div>
       <TimeOverview />
-      <ItemList onClick={this.handleClick} onChange={this.handleChange} listOfData={this.state.listOfData}/>
+      <ItemList onClick={this.handleClick} onChange={this.handleChange} sortList={this.sortList} listOfData={this.state.listOfData}/>
     </div>
     );
   }
