@@ -9,7 +9,7 @@ class App extends React.Component {
       listOfData: [],
       dataObj: {
         name: '',
-        order: 1,
+        order: '1',
         minutes: null,
         hours: null,
         description: '',
@@ -25,7 +25,7 @@ class App extends React.Component {
       listOfData: (() => {
         let newList = new Array(...this.state.listOfData)
         newList.sort(function(a,b){
-          if (a.order != b.order){
+          if (a.order !== b.order){
             return Number(a.order) - Number(b.order)
           }
           else {
@@ -78,7 +78,7 @@ class App extends React.Component {
       listOfData: this.state.listOfData.concat(data),
       dataObj: (() => {
         let newObj = this.state.dataObj;
-        newObj.order += 1
+        newObj.order = (Number(newObj.order) + 1).toString()
         newObj.id += 1
         return newObj
       })()
