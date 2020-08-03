@@ -25,7 +25,12 @@ class App extends React.Component {
       listOfData: (() => {
         let newList = new Array(...this.state.listOfData)
         newList.sort(function(a,b){
-          return Number(a.order) - Number(b.order)
+          if (a.order != b.order){
+            return Number(a.order) - Number(b.order)
+          }
+          else {
+            return Number(a.order) - Number(b.order) - 1
+          }
         })
         for(let i = 0; i < newList.length; i++){
           newList[i].order = i +1
