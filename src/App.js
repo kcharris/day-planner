@@ -41,35 +41,46 @@ class App extends React.Component {
   }
   handleChange(e) {
     this.setState({
-      listOfData: this.state.listOfData.map((x) => {
-        const name = e.target.name
-        const value = e.target.value
-        if (x.id === Number(e.target.id)){
-          switch(e.target.name){
-            case 'name':
-              x[name] = value
-              break
-            case 'order':
-              if (/^[1-9]?$|^[1-9][\d]$/.test(value))
+      listOfData: (() => {
+        let sortTest = false
+        let newList = this.state.listOfData.map((x) => {
+          const name = e.target.name
+          const value = e.target.value
+          if (x.id === Number(e.target.id)){
+            switch(e.target.name){
+              case 'name':
                 x[name] = value
-              break
-            case 'hours':
-              if (/^[\d]?$|^1[\d]$|^2[0-4]$/.test(value))
+                break
+              case 'order':
+                if (/^[\d]?$|^[\d][\d]$/.test(value))
+                  x[name] = value
+                if (/^\d\d$/.test(value))
+                  sortTest = true
+                break
+              case 'hours':
+                if (/^[\d]?$|^1[\d]$|^2[0-4]$/.test(value))
+                  x[name] = value
+                break
+              case 'minutes':
+                if(/^[\d]$|^[1-5][\d]$/.test(value))
                 x[name] = value
-              break
-            case 'minutes':
-              if(/^[\d]$|^[1-5][\d]$/.test(value))
-              x[name] = value
-              break
-            case 'description':
-              x[name] = value
-              break
-            default:
+                break
+              case 'description':
+                x[name] = value
+                break
+              default:
+            }            
           }
-          
+          return x
+        })
+        if (sortTest){
+          newList.sort((a,b) => {
+            return Number(a.order) - Number(b.order); //currently fails to replace item it's set to replace
+          })
+          sortTest = false
         }
-        return x
-      })
+        return newList
+      })()
     })
   }
   handleClick(){
