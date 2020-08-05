@@ -9,7 +9,7 @@ class App extends React.Component {
       listOfData: [],
       dataObj: {
         name: '',
-        order: '1',
+        order: '01',
         minutes: null,
         hours: null,
         description: '',
@@ -18,26 +18,6 @@ class App extends React.Component {
     }
     this.handleClick = this.handleClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.sortList = this.sortList.bind(this)
-  }
-  sortList() {
-    this.setState({
-      listOfData: (() => {
-        let newList = new Array(...this.state.listOfData)
-        newList.sort(function(a,b){
-          if (a.order !== b.order){
-            return Number(a.order) - Number(b.order)
-          }
-          else {
-            return Number(a.order) - Number(b.order) - 1
-          }
-        })
-        for(let i = 0; i < newList.length; i++){
-          newList[i].order = i +1
-        }
-        return newList
-      })()
-    })
   }
   handleChange(e) {
     this.setState({
@@ -90,6 +70,9 @@ class App extends React.Component {
       dataObj: (() => {
         let newObj = this.state.dataObj;
         newObj.order = (Number(newObj.order) + 1).toString()
+        if (Number(newObj.order) < 10){
+          newObj.order = "0" + newObj.order
+        }
         newObj.id += 1
         return newObj
       })()
@@ -99,7 +82,7 @@ class App extends React.Component {
     return (
     <div>
       <TimeOverview />
-      <ItemList onClick={this.handleClick} onChange={this.handleChange} sortList={this.sortList} listOfData={this.state.listOfData}/>
+      <ItemList onClick={this.handleClick} onChange={this.handleChange} listOfData={this.state.listOfData}/>
     </div>
     );
   }
