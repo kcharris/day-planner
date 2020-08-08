@@ -23,11 +23,13 @@ class App extends React.Component {
     this.setState({
       listOfData: (() => {
         let sortTest = false
-        let newList = this.state.listOfData.map((x) => {
-          const name = e.target.name
-          const value = e.target.value
-          if (x.id === Number(e.target.id)){
-            switch(e.target.name){
+        const name = e.target.name
+        const value = e.target.value
+        const id = Number(e.target.id)
+
+        let newList = this.state.listOfData.map((x) => {   
+          if (x.id === id){
+            switch(name){
               case 'name':
                 x[name] = value
                 break
@@ -54,9 +56,28 @@ class App extends React.Component {
           return x
         })
         if (sortTest){
-          newList.sort((a,b) => {
-            return Number(a.order) - Number(b.order); //currently fails to replace item it's set to replace
+          newList = newList.map((x) => {
+            if (x.id !== id){
+              if (Number(x.order) >= Number(value)){
+                x.order = (Number(x.order) + 1).toString()
+                if (Number(x.order) < 10){
+                  x.order = "0" + x.order
+                }  
+              }  
+            }
+            return x
           })
+          newList.sort((a,b) => {
+            return Number(a.order) - Number(b.order);
+          })
+          for(let i = 0; i < newList.length; i++){
+            if(i < 9){
+              newList[i].order = "0" + (i + 1).toString()
+            }
+            else {
+              newList[i].order = (i + 1).toString()
+            }
+          }
           sortTest = false
         }
         return newList
