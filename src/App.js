@@ -55,7 +55,7 @@ class App extends React.Component {
           }
           return x
         })
-        if (sortTest){
+        if (sortTest){  // bug, the switched number is one below target
           newList = newList.map((x) => {
             if (x.id !== id){
               if (Number(x.order) >= Number(value)){
