@@ -10,8 +10,8 @@ class App extends React.Component {
       dataObj: {
         name: '',
         order: '01',
-        minutes: null,
-        hours: null,
+        minutes: '',
+        hours: '',
         description: '',
         id: 0,
       }
@@ -56,17 +56,31 @@ class App extends React.Component {
           return x
         })
         if (sortTest){  // bug, the switched number is one below target
-          newList = newList.map((x) => {
-            if (x.id !== id){
-              if (Number(x.order) >= Number(value)){
-                x.order = (Number(x.order) + 1).toString()
-                if (Number(x.order) < 10){
-                  x.order = "0" + x.order
+          const sumOrder = newList.reduce((x, y) => {
+            return Number(x.order) + y
+          }, 0)
+          const sumLength = (newList.length / 2) * (newList.length + 1) //gauss formula
+          
+          if(sumOrder < sumLength){
+            newList = newList.map((x) => {
+              if (x.id !== id){
+                if (Number(x.order) >= Number(value)){
+                  x.order = (Number(x.order) + 1).toString()
                 }  
-              }  
-            }
-            return x
-          })
+              }
+              return x
+            })
+          }
+          else {
+            newList = newList.map((x) => {
+              if (x.id !== id){
+                if (Number(x.order) >= Number(value)){
+                  x.order = (Number(x.order) - 1).toString()
+                }  
+              }
+              return x
+            })
+          }
           newList.sort((a,b) => {
             return Number(a.order) - Number(b.order);
           })
